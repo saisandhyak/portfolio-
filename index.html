@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sai Sandhya Kurakula | Data Analyst</title>
+    <meta name="description" content="Data Analyst portfolio — SQL, Python, Power BI, SEC financial reporting.">
+
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =====================================================
+           RESET & BASE
+           ===================================================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0e0e10;
+            --surface: #18181b;
+            --surface-2: #1f1f23;
+            --border: #2a2a2e;
+            --border-strong: #3a3a40;
+            --text: #ededee;
+            --text-muted: #a1a1a6;
+            --text-dim: #6c6c72;
+            --accent: #f5a623;
+            --accent-soft: rgba(245, 166, 35, 0.12);
+            --accent-strong: #ffb83d;
+            --radius: 12px;
+            --radius-lg: 16px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-muted);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        /* =====================================================
+           LAYOUT
+           ===================================================== */
+        .container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 32px;
+            max-width: 1200px;
+            padding: 32px 24px;
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           SIDEBAR
+           ===================================================== */
+        .sidebar {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            position: sticky;
+            top: 32px;
+            align-self: start;
+            max-height: calc(100vh - 64px);
+            overflow-y: auto;
+        }
+
+        .profile { text-align: center; }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-strong);
+            margin: 0 auto 18px;
+        }
+
+        .profile h1 {
+            color: var(--text);
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .profile-title {
+            display: inline-block;
+            color: var(--accent);
+            background-color: var(--accent-soft);
+            border: 1px solid var(--accent-soft);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 999px;
+            margin-top: 10px;
+            letter-spacing: 0.02em;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 24px 0;
+        }
+
+        .contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .contact-list li { display: flex; flex-direction: column; gap: 2px; }
+
+        .contact-label {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+        }
+
+        .contact-value {
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .social-row a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .social-row a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            background-color: var(--accent-soft);
+            transform: translateY(-2px);
+        }
+
+        .social-row svg { width: 18px; height: 18px; }
+
+        /* =====================================================
+           MAIN CONTENT
+           ===================================================== */
+        .main {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: rgba(24, 24, 27, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 28px;
+        }
+
+        .top-nav a {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .top-nav a:hover { color: var(--text); }
+
+        .top-nav a.active { color: var(--accent); }
+
+        .top-nav a.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -17px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .section {
+            padding: 60px 50px;
+            scroll-margin-top: 80px;
+        }
+
+        .section + .section { border-top: 1px solid var(--border); }
+
+        .section-eyebrow {
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            color: var(--text);
+            font-size: 1.85rem;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            margin-bottom: 24px;
+        }
+
+        /* =====================================================
+           HERO
+           ===================================================== */
+        .hero { padding: 80px 50px; }
+
+        .hero h2 {
+            color: var(--text);
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .hero h2 .accent-name { color: var(--accent); }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text);
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 22px;
+            max-width: 580px;
+        }
+
+        .hero-body {
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 620px;
+        }
+
+        /* =====================================================
+           SKILLS
+           ===================================================== */
+        .skill-group { margin-bottom: 22px; }
+        .skill-group:last-child { margin-bottom: 0; }
+
+        .skill-group-label {
+            color: var(--text-dim);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+        }
+
+        .skill-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-pill {
+            background-color: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 7px 14px;
+            border-radius: 999px;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .skill-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* =====================================================
+           TIMELINE
+           ===================================================== */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background-color: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 32px;
+        }
+
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -32px;
+            top: 8px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            background-color: var(--bg);
+        }
+
+        .timeline-item::after {
+            content: "";
+            position: absolute;
+            left: -27px;
+            top: 13px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        .timeline-card {
+            background-color: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px 24px;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .timeline-card:hover {
+            border-color: var(--border-strong);
+            transform: translateX(2px);
+        }
+
+        .timeline-card h3 {
+            color: var(--text);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 4px;
+        }
+
+        .timeline-meta {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-bottom: 4px;
+        }
+
+        .timeline-meta strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .timeline-dates {
+            color: var(--text-dim);
+            font-size: 0.82rem;
+            margin-bottom: 14px;
+        }
+
+        .timeline-dates::before {
+            content: "▸ ";
+            color: var(--accent);
+        }
+
+        .achievements {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .achievements li {
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        .achievements li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        .achievements strong { color: var(--text); font-weight: 600; }
+
+        .edu-coursework {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .edu-coursework strong { color: var(--text); font-weight: 600; }
+
+        /* =====================================================
+           PORTFOLIO
+           ===================================================== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .project-card {
+            background-color: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 0 1px var(--accent-soft);
+        }
+
+        .project-thumb {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            background: linear-gradient(135deg, #0a0a0c 0%, #141418 100%);
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        .project-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .project-body {
+            padding: 22px 22px 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .project-body h3 {
+            color: var(--text);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-bottom: 14px;
+        }
+
+        .project-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-bottom: 18px;
+        }
+
+        .project-bullets li {
+            position: relative;
+            padding-left: 16px;
+            font-size: 0.86rem;
+            line-height: 1.5;
+        }
+
+        .project-bullets li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .project-bullets strong { color: var(--text); font-weight: 600; }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        .project-tags span {
+            background-color: var(--bg);
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn svg { width: 14px; height: 14px; }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #1a1209;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-strong);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text);
+            border-color: var(--border-strong);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* =====================================================
+           CONTACT
+           ===================================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .contact-block {
+            background-color: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px;
+        }
+
+        .contact-block .label {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .contact-block .value {
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .contact-cta-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .contact-cta {
+            flex: 1;
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 22px;
+            background-color: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .contact-cta:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .contact-cta svg { width: 20px; height: 20px; }
+
+        .contact-closer {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding: 18px 22px;
+            background-color: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .contact-closer strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+        @media (max-width: 960px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 16px;
+            }
+
+            .sidebar {
+                position: static;
+                max-height: none;
+                padding: 28px 24px;
+            }
+
+            .top-nav {
+                padding: 14px 20px;
+                gap: 18px;
+                overflow-x: auto;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .top-nav a {
+                white-space: nowrap;
+                font-size: 0.88rem;
+            }
+
+            .section, .hero { padding: 44px 24px; }
+
+            .hero h2 { font-size: 1.95rem; }
+            .hero-sub { font-size: 1rem; }
+
+            .section-title { font-size: 1.5rem; }
+
+            .portfolio-grid { grid-template-columns: 1fr; }
+
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .timeline { padding-left: 24px; }
+            .timeline::before { left: 4px; }
+            .timeline-item::before { left: -28px; width: 14px; height: 14px; }
+            .timeline-item::after { left: -24px; top: 11px; width: 6px; height: 6px; }
+            .timeline-card { padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ====================================================
+             SIDEBAR
+             ==================================================== -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="./portfolio pic.jpeg" alt="Sai Sandhya Kurakula" class="profile-img">
+                <h1>Sai Sandhya Kurakula</h1>
+                <span class="profile-title">Data Analyst</span>
+            </div>
+
+            <hr class="divider">
+
+            <ul class="contact-list">
+                <li>
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value">saisandhyak13@gmail.com</span>
+                </li>
+                <li>
+                    <span class="contact-label">Phone</span>
+                    <span class="contact-value">+1 561-975-2652</span>
+                </li>
+                <li>
+                    <span class="contact-label">Location</span>
+                    <span class="contact-value">Delray Beach, FL</span>
+                </li>
+            </ul>
+
+            <hr class="divider">
+
+            <div class="social-row">
+                <a href="https://github.com/saisandhyak" target="_blank" rel="noopener" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/saisandhyak" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ====================================================
+             MAIN CONTENT
+             ==================================================== -->
+        <main class="main">
+
+            <!-- TOP NAV -->
+            <nav class="top-nav">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+
+            <!-- HERO -->
+            <section id="home" class="hero">
+                <p class="section-eyebrow">Welcome</p>
+                <h2>Hi, I'm <span class="accent-name">Sai Sandhya Kurakula</span></h2>
+                <p class="hero-sub">Data Analyst, turning messy financial and business data into clear, decision-ready reporting.</p>
+                <p class="hero-body">I work primarily in SQL, Python, Power BI, and Excel, with recent focus on SEC financial reporting, KPI dashboards, and backend data pipelines. Currently a Financial Data Analyst at Omnesys Technologies and a recent MS Data Science graduate from Florida Atlantic University.</p>
+            </section>
+
+            <!-- SKILLS -->
+            <section id="skills" class="section">
+                <p class="section-eyebrow">Toolbox</p>
+                <h2 class="section-title">Skills</h2>
+
+                <div class="skill-group">
+                    <div class="skill-group-label">Languages &amp; Databases</div>
+                    <div class="skill-pills">
+                        <span class="skill-pill">SQL</span>
+                        <span class="skill-pill">Python (Pandas, NumPy)</span>
+                        <span class="skill-pill">SQLite</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-label">BI &amp; Reporting</div>
+                    <div class="skill-pills">
+                        <span class="skill-pill">Power BI</span>
+                        <span class="skill-pill">Excel (Pivot Tables, Power Query)</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-label">Analytics</div>
+                    <div class="skill-pills">
+                        <span class="skill-pill">Data Cleaning</span>
+                        <span class="skill-pill">ETL Workflows</span>
+                        <span class="skill-pill">KPI Dashboards</span>
+                        <span class="skill-pill">Variance Analysis</span>
+                        <span class="skill-pill">Financial Reporting</span>
+                        <span class="skill-pill">SEC Filings (10-K/10-Q, XBRL)</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-label">Tools</div>
+                    <div class="skill-pills">
+                        <span class="skill-pill">Git</span>
+                        <span class="skill-pill">GitHub</span>
+                        <span class="skill-pill">Microsoft Office</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXPERIENCE -->
+            <section id="experience" class="section">
+                <p class="section-eyebrow">Where I've Worked</p>
+                <h2 class="section-title">Experience</h2>
+
+                <div class="timeline">
+
+                    <div class="timeline-item">
+                        <div class="timeline-card">
+                            <h3>Financial Data Analyst</h3>
+                            <p class="timeline-meta"><strong>Omnesys Technologies, Inc</strong> — Contract</p>
+                            <p class="timeline-dates">Mar 2026 - Present &nbsp;·&nbsp; Remote</p>
+                            <ul class="achievements">
+                                <li>Building the backend data pipeline for an automated SEC financial statement reconstruction system designed to work across <strong>SEC-filing companies</strong> without company-specific hardcoding.</li>
+                                <li>Reconstructing <strong>10-K and 10-Q</strong> financial statements from raw XBRL filing data with pixel-accurate alignment to original SEC filings.</li>
+                                <li>Designed validation logic to verify values, labels, tags, and presentation hierarchy against source filings.</li>
+                                <li>Solved structural problems in period selection, label normalization, and presentation ordering — areas where naive XBRL parsing produces incorrect outputs.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-card">
+                            <h3>Data Analyst Intern</h3>
+                            <p class="timeline-meta"><strong>NxtWave</strong></p>
+                            <p class="timeline-dates">Feb 2023 - Dec 2023 &nbsp;·&nbsp; Hyderabad, India</p>
+                            <ul class="achievements">
+                                <li>Analyzed learner outcome data across an edtech platform reaching <strong>3,000+ colleges and 1,300+ hiring partners</strong>.</li>
+                                <li>Built Power BI dashboards tracking <strong>completion rates, time-to-hire, and placement success</strong> by program.</li>
+                                <li>Used SQL and Python to clean, join, and validate multi-source datasets for reporting reliability.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-card">
+                            <h3>Data Analytics Trainee</h3>
+                            <p class="timeline-meta"><strong>Innomatics Research Labs</strong></p>
+                            <p class="timeline-dates">Nov 2022 - Dec 2023 &nbsp;·&nbsp; Hyderabad, India</p>
+                            <ul class="achievements">
+                                <li>Completed structured training in <strong>SQL, Python, and Power BI</strong> with emphasis on data cleaning, transformation, and dashboard development.</li>
+                                <li>Built reports and dashboards across sales, customer, and operational datasets.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- EDUCATION -->
+            <section id="education" class="section">
+                <p class="section-eyebrow">Academic Background</p>
+                <h2 class="section-title">Education</h2>
+
+                <div class="timeline">
+
+                    <div class="timeline-item">
+                        <div class="timeline-card">
+                            <h3>Master's in Data Science and Analytics</h3>
+                            <p class="timeline-meta"><strong>Florida Atlantic University</strong>, FL, USA</p>
+                            <p class="timeline-dates">Jan 2024 - Dec 2025</p>
+                            <p class="edu-coursework"><strong>Coursework:</strong> Business Analytics &amp; Big Data, Database Management Systems, Advanced Business Analytics, Data Analysis for Managers.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-card">
+                            <h3>Bachelor's in Computer Science</h3>
+                            <p class="timeline-meta"><strong>CMR Institute of Technology</strong>, Hyderabad, India</p>
+                            <p class="timeline-dates">Aug 2019 - May 2023</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PORTFOLIO -->
+            <section id="portfolio" class="section">
+                <p class="section-eyebrow">Selected Work</p>
+                <h2 class="section-title">Portfolio</h2>
+
+                <div class="portfolio-grid">
+
+                    <!-- CARD 1: Point-in-Time SEC Platform -->
+                    <article class="project-card">
+                        <div class="project-thumb">
+                            <img src="./images/sec-revision.png" alt="SEC revision history terminal output">
+                        </div>
+                        <div class="project-body">
+                            <h3>Point-in-Time SEC Financial Data Platform</h3>
+                            <p class="project-desc">Python + SQLite platform that stores every historical version of SEC-reported financial facts, enabling true point-in-time analysis instead of just showing the latest value.</p>
+                            <ul class="project-bullets">
+                                <li>Append-only pipeline covering <strong>49,000+ observations across 768 metrics</strong>, preserving filed dates, period-end dates, and filing-level history.</li>
+                                <li>Detected a <strong>$573M silent revision</strong> in Apple's deferred revenue between an original 10-K and its amendment — invisible in standard data feeds.</li>
+                                <li>Implemented as-of-date and revision-history queries returning the exact value known on any given date.</li>
+                            </ul>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>SQLite</span>
+                                <span>SEC Data</span>
+                                <span>XBRL</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/saisandhyak" target="_blank" rel="noopener" class="btn btn-primary">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                                    View Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- CARD 2: SEC Reconstruction Engine -->
+                    <article class="project-card">
+                        <div class="project-thumb">
+                            <img src="./images/sec-reconstruction.png" alt="Reconstructed SEC filing alongside original">
+                        </div>
+                        <div class="project-body">
+                            <h3>SEC Financial Statement Reconstruction Engine</h3>
+                            <p class="project-desc">Backend data pipeline that reconstructs 10-K and 10-Q financial statements from raw XBRL filing data with pixel-accurate alignment to original filings.</p>
+                            <ul class="project-bullets">
+                                <li>Designed <strong>non-hardcoded architecture</strong> intended to work across SEC-filing companies, not tuned to any specific filer.</li>
+                                <li>Built validation logic for values, labels, tags, and presentation hierarchy against source filings.</li>
+                                <li>Solved structural problems in period selection, label normalization, and presentation ordering where naive XBRL parsing produces incorrect outputs.</li>
+                            </ul>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>XBRL</span>
+                                <span>SEC Data</span>
+                                <span>Financial Reporting</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/saisandhyak" target="_blank" rel="noopener" class="btn btn-primary">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                                    View Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- CARD 3: Black Friday -->
+                    <article class="project-card">
+                        <div class="project-thumb">
+                            <img src="./images/blackfriday.png" alt="Black Friday Power BI dashboard">
+                        </div>
+                        <div class="project-body">
+                            <h3>Black Friday Retail Performance Analysis</h3>
+                            <p class="project-desc">KPI-driven Power BI dashboard analyzing Black Friday retail performance across forecast vs actual revenue, YoY trends, and promotion effectiveness.</p>
+                            <ul class="project-bullets">
+                                <li>Built variance decomposition framework comparing expected vs actual revenue across product categories.</li>
+                                <li>Analyzed promotion effectiveness across discount tiers to surface ROI patterns and revenue drivers.</li>
+                                <li>Designed daily revenue trend visualizations identifying peak demand windows and promotional impact.</li>
+                            </ul>
+                            <div class="project-tags">
+                                <span>Power BI</span>
+                                <span>Sales Analysis</span>
+                                <span>KPI Dashboards</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/saisandhyak" target="_blank" rel="noopener" class="btn btn-primary">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                                    View Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- CARD 4: Apple Global Revenue -->
+                    <article class="project-card">
+                        <div class="project-thumb">
+                            <img src="./images/apple.png" alt="Apple Global Revenue Power BI dashboard">
+                        </div>
+                        <div class="project-body">
+                            <h3>Apple Global Revenue Pulse</h3>
+                            <p class="project-desc">Executive-level Power BI dashboard analyzing Apple's regional revenue trends across five years (2021-2025), built for non-technical stakeholder readability.</p>
+                            <ul class="project-bullets">
+                                <li>Built KPI dashboard tracking revenue trends, YoY growth, and regional performance breakdowns.</li>
+                                <li>Used SQL and Python (Pandas) to validate and structure raw revenue data before modeling.</li>
+                                <li>Surfaced <strong>Americas as primary revenue driver (~43% of total)</strong> with steady Europe contribution and recovery in Greater China.</li>
+                            </ul>
+                            <div class="project-tags">
+                                <span>Power BI</span>
+                                <span>Revenue Analysis</span>
+                                <span>SQL</span>
+                                <span>Python</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/saisandhyak" target="_blank" rel="noopener" class="btn btn-primary">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                                    View Code
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <section id="contact" class="section">
+                <p class="section-eyebrow">Get in Touch</p>
+                <h2 class="section-title">Contact</h2>
+
+                <div class="contact-grid">
+                    <div class="contact-block">
+                        <div class="label">Email</div>
+                        <div class="value">saisandhyak13@gmail.com</div>
+                    </div>
+                    <div class="contact-block">
+                        <div class="label">Phone</div>
+                        <div class="value">+1 561-975-2652</div>
+                    </div>
+                    <div class="contact-block">
+                        <div class="label">Location</div>
+                        <div class="value">Delray Beach, FL</div>
+                    </div>
+                </div>
+
+                <div class="contact-cta-row">
+                    <a href="https://github.com/saisandhyak" target="_blank" rel="noopener" class="contact-cta">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/saisandhyak" target="_blank" rel="noopener" class="contact-cta">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                    </a>
+                </div>
+
+                <p class="contact-closer">Currently exploring full-time <strong>Data Analyst, Business Analyst, and Financial Reporting Analyst</strong> roles in the US. Open to relocate.</p>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ====================================================
+         JS — Active section highlighting on scroll
+         ==================================================== -->
+    <script>
+        (function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.main section[id]');
+
+            const setActive = (id) => {
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) setActive(entry.target.id);
+                });
+            }, {
+                rootMargin: '-30% 0px -60% 0px',
+                threshold: 0
+            });
+
+            sections.forEach(s => observer.observe(s));
+        })();
+    </script>
+
+</body>
+</html>
